@@ -6,28 +6,13 @@ public abstract class Card {
     protected double credit;
 
     public int getCardId() {
-        return cardId;
+        return this.cardId;
     }
 
-    public void setCardId(int cardId) {
-        this.cardId = cardId;
-    }
 
-    public String getName() {
-        return name;
-    }
 
-    public void setName(String name) {
-        this.name = name;
-    }
 
-    public double getCredit() {
-        return credit;
-    }
 
-    public void setCredit(double credit) {
-        this.credit = credit;
-    }
 
     //optional
     protected String address;
@@ -40,11 +25,9 @@ public abstract class Card {
 
     //Methods
     protected abstract boolean pay(double amount);
-
     protected void printMyDetails() {
         System.out.println(this.cardId + "      " + this.name + "      " + this.credit);
     }
-
     abstract Card searchAccount(int number);
 
 

@@ -3,7 +3,7 @@ import java.util.ArrayList;
 public class GoldCard extends Card {
 
     int discount;
-    ArrayList<GoldCard> GoldAccounts = new ArrayList<>();
+    ArrayList<GoldCard> goldCard = new ArrayList<>();
 
 
 
@@ -16,28 +16,31 @@ public class GoldCard extends Card {
 
 
     public void createGoldAccounts() {
-        GoldAccounts.add(new GoldCard(11, " Liam", 125.50, 5));
-        GoldAccounts.add(new GoldCard(21, " Rochelle ", 1525.24, 5));
-        GoldAccounts.add(new GoldCard(31, " Darren ", 155.25, 5));
-        GoldAccounts.add(new GoldCard(41, " Cookie ", 1445.22, 5));
-        GoldAccounts.add(new GoldCard(51, " Shaienne ", 875.36, 5));
-        GoldAccounts.add(new GoldCard(61, " Alison", 134.25, 5));
-        GoldAccounts.add(new GoldCard(71, " Peter", 177.86, 5));
-        GoldAccounts.add(new GoldCard(81, " Patricia ", 1125.99, 5));
-        GoldAccounts.add(new GoldCard(91, " Gilbert Goldy ", 1478.15, 5));
+        goldCard.add(new GoldCard(11, " Liam", 125.50, 5));
+        goldCard.add(new GoldCard(21, " Rochelle ", 1525.24, 5));
+        goldCard.add(new GoldCard(31, " Darren ", 155.25, 5));
+        goldCard.add(new GoldCard(41, " Cookie ", 1445.22, 5));
+        goldCard.add(new GoldCard(51, " Shaienne ", 875.36, 5));
+        goldCard.add(new GoldCard(61, " Alison", 134.25, 5));
+        goldCard.add(new GoldCard(71, " Peter", 100.00, 5));
+        goldCard.add(new GoldCard(81, " Patricia ", 1125.99, 5));
+        goldCard.add(new GoldCard(91, " Gilbert Goldy ", 1478.15, 5));
 
     }
     public GoldCard() {
     }
 
     @Override
-    Card searchAccount(int number) {
-        for (Card account : GoldAccounts) {
+    public GoldCard searchAccount(int number) {
+
+        for (GoldCard account : goldCard) {
+
             if (number == account.getCardId()) {
-                return GoldAccounts.get(this.cardId);
+                return account;
             }
-            throw new IllegalArgumentException("Unable to find your account");
-        } return null;
+        }
+
+        throw new IllegalArgumentException();
     }
 
 
@@ -61,7 +64,7 @@ public class GoldCard extends Card {
         this.credit = credit;
         this.discount = discount;
         setDiscount(discount);
-        GoldAccounts.add(this);
+        goldCard.add(this);
         return true;
     }
 
@@ -74,7 +77,8 @@ public class GoldCard extends Card {
     @Override
     protected boolean pay(double amount) {
         double d = this.discount / 100.00;
-        this.credit -= (amount * d);
+        this.credit -= (amount - (amount* d));
+        System.out.println("Paid an amount of $" + amount + " with a discount of"+this.discount+"% , balance is now $" + credit);
         return true;
     }
 

@@ -8,7 +8,6 @@ public class App {
 
     public static void main(String[] args) {
 
-
         a.createRegularAccounts();
         b.createGoldAccounts();
 
@@ -28,40 +27,29 @@ public class App {
         System.out.println("2) Show GoldCard users");
         System.out.println("3) Make Payment");
         int inputA = menuChoice.nextInt();
-        int searchId;
-        double amount;
 
         switch (inputA) {
             case 1:
-                System.out.println(a.Accounts);
+                System.out.println(a.regCard);
                 break;
             case 2:
-                System.out.println(b.GoldAccounts);
+                System.out.println(b.goldCard);
                 break;
             case 3:
-                System.out.println("Gold member? Y/N");
-                String inputB = menuChoice.next();
-                switch (inputB) {
-                    case ("N"):
-                    case ("n"):
-                        System.out.println("Select account");
-                        searchId = menuChoice.nextInt();
+                System.out.println("Select account");
+                int searchId = menuChoice.nextInt();
 
-                        System.out.println("Insert amount");
-                        amount = menuChoice.nextDouble();
-
-                        a.searchAccount(searchId).pay(amount);
-                        break;
-                    case ("Y"):
-                    case ("y"):
-                        System.out.println("Select account");
-                        searchId = menuChoice.nextInt();
-
-                        System.out.println("Insert amount");
-                        amount = menuChoice.nextDouble();
-
-                        b.searchAccount(searchId).pay(amount);
-                        break;
+                try {
+                    RegularCard r = a.searchAccount(searchId);
+                    System.out.println("Insert amount");
+                    double amount = menuChoice.nextDouble();
+                    r.pay(amount);
+                }catch (IllegalArgumentException e){
+                    GoldCard g = b.searchAccount(searchId);
+                    System.out.println("Insert amount");
+                    double amount = menuChoice.nextDouble();
+                    g.pay(amount);
+                    break;
                 }
 
             case 0:
