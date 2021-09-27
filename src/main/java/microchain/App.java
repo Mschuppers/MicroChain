@@ -1,3 +1,5 @@
+package microchain;
+
 import java.util.Scanner;
 
 public class App {
@@ -12,21 +14,24 @@ public class App {
         b.createGoldAccounts();
 
 
-        while (nextChoice) {
-            run();
-        }
+       // while (nextChoice) {
+            run(1);
+            run(2);
+            run(3);
+       // }
     }
 
 
-    static boolean run() {
+    static boolean run(int input) {
 
 
         Scanner menuChoice = new Scanner(System.in);
         System.out.println("Select one of our services");
         System.out.println("1) Show Regular users");
-        System.out.println("2) Show GoldCard users");
+        System.out.println("2) Show microchain.GoldCard users");
         System.out.println("3) Make Payment");
-        int inputA = menuChoice.nextInt();
+        System.out.println("0) Exit app");
+        int inputA = input;//menuChoice.nextInt();
 
         switch (inputA) {
             case 1:
@@ -37,17 +42,17 @@ public class App {
                 break;
             case 3:
                 System.out.println("Select account");
-                int searchId = menuChoice.nextInt();
+                int searchId = 1;//menuChoice.nextInt();
 
                 try {
                     RegularCard r = a.searchAccount(searchId);
                     System.out.println("Insert amount");
-                    double amount = menuChoice.nextDouble();
+                    double amount =100; //menuChoice.nextDouble();
                     r.pay(amount);
                 }catch (IllegalArgumentException e){
                     GoldCard g = b.searchAccount(searchId);
                     System.out.println("Insert amount");
-                    double amount = menuChoice.nextDouble();
+                    double amount = 100;//menuChoice.nextDouble();
                     g.pay(amount);
                     break;
                 }
